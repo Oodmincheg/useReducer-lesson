@@ -21,7 +21,7 @@ import {useEffect, useReducer} from 'react'
 function useCounter() {
     
 const [state, dispatch] = useReducer(reducerFunction, initialCount);
-  
+
   useEffect(() => {
      console.log(state.count)
   }, [state.count])

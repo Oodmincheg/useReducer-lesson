@@ -1,7 +1,8 @@
 import Counter from './components/Counter';
+import LoginForm from './components/LoginForm'
 
 function App() {
-  return <Counter />
+  return <LoginForm />
 }
 
 export default App;
