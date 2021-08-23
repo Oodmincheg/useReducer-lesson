@@ -1,5 +1,5 @@
 import React, {useRef, useState, useContext} from 'react'
-import {Context} from './userContext'
+import {UserContext, CounterContext} from './userContext'
 
 
 const Input = ({loginRef, validateLogin}) => {
@@ -11,8 +11,8 @@ export default function LoginForm() {
     const loginRef = useRef(null)
     const passwordRef = useRef(null)
     const [loginError, setLoginError] = useState(null)
-    const { setUser } = useContext(Context)
-
+    const { setUser } = useContext(UserContext)
+    const { counter } = useContext(CounterContext)
 
     
 
@@ -41,6 +41,7 @@ export default function LoginForm() {
     }
     return (
         <form>
+            <div>Counter: {counter}</div>
             <Input loginRef={loginRef} validateLogin={validateLogin} /> 
             {loginError && <div>{loginError}</div>}
             <input ref={passwordRef} type="text" placeholder="Enter password"/>
