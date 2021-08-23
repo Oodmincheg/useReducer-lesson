@@ -1,11 +1,20 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useContext} from 'react'
+import {Context} from './userContext'
+
+
+const Input = ({loginRef, validateLogin}) => {
+    //  console.log('render component input with context ', stateContext)
+    return <input ref={loginRef} type="text" placeholder="Enter login" onBlur={validateLogin}/>
+}
 
 export default function LoginForm() {
     const loginRef = useRef(null)
     const passwordRef = useRef(null)
     const [loginError, setLoginError] = useState(null)
+    const { setUser } = useContext(Context)
 
-    console.log('render component')
+
+    
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -14,7 +23,7 @@ export default function LoginForm() {
 
         const login = loginRef.current.value
         const password = passwordRef.current.value
-        
+        setUser(login)
         fetch('https:/google.com', {method: 'post', body: {login: login, password: password}})
     }
     function validateLogin() {
@@ -32,7 +41,7 @@ export default function LoginForm() {
     }
     return (
         <form>
-            <input ref={loginRef} type="text" placeholder="Enter login" onBlur={validateLogin}/>
+            <Input loginRef={loginRef} validateLogin={validateLogin} /> 
             {loginError && <div>{loginError}</div>}
             <input ref={passwordRef} type="text" placeholder="Enter password"/>
             <button onClick={handleSubmit}>Submit</button>
